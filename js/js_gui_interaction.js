@@ -148,10 +148,11 @@ function SetGroup(returnData){
 		// Create orderlist
 		console.log('>>> done !');
 }
+
 function SetGroupProducts(returnData){
 	console.log('starting SetGroupProducts(object)');
 	// system
-	var sGroupname = returnData.groupname;
+	var sGroupname = returnData.groupName;
 	// debug
 	console.log('Showing group products list');
 	// gui
@@ -177,7 +178,8 @@ function SetGroupProducts(returnData){
 				$("#lstGroupProductsList").append('<li id="' +sProducts +'" class="lstGroupProductItem" style="background-color:' + sColor +';">' +sProducts +'</li><input type="hidden" value=' +sStatus +'>')
 			}
 		}
-		
+	
+	//Togle the items from true<>false when the used is clicking	
 	$(".lstGroupProductItem").click(function(){
 		var sProductname = $(this).attr('id');
 		var sCurrentValue = $(this).closest('div');
@@ -188,19 +190,11 @@ function SetGroupProducts(returnData){
 			sToggleValue = 'true';
 		}
 		
+		//At the end, the change made by the user will be sent back to booons to be set in db
 		SaveGroupConfig(sGroupname, sToggleValue, sProductname);
-		
-		// You can call Franks function just passing the togglevalue ! Also add the product !!!!
-		// SaveGroupConfig(sGroupName, sToggleValue, sProductname);
-		console.log('now it is:'+ sCurrentValue + ', and we will set it to:' + sToggleValue +' for '+ sProductname);
-		console.log('HERE WE GO >>>>>>>>');
-		$(this).next('input').val(sToggleValue);
-		console.log('done!');
 	});	
-		
-		
-		
-		
+	
+	//Make sure that all page are hidden except for the actual group item configuration
 	$(".pageContainer").hide();
 	$("#pageConfigureGroup").show();
 }
