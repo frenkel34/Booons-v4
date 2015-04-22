@@ -148,7 +148,19 @@ function SetGroup(returnData){
 		// Create orderlist
 		console.log('>>> done !');
 }
-
+function SetGroupProducts(){
+	console.log('starting SetGroupProducts(object)');
+	// system
+	var sGroupname = returnData.groupname;
+	// debug
+	console.log('Showing group products list');
+	// gui
+	
+	var slistGroupProduct = '<ul><li>Coffee</li><li>Tea</li></ul>';
+	$("#groupProductsList").html(slistGroupProduct);
+	$(".pageContainer").hide();
+	$("#pageConfigureGroup").show();
+}
 
 
 
