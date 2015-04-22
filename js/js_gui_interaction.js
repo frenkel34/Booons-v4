@@ -156,8 +156,50 @@ function SetGroupProducts(returnData){
 	console.log('Showing group products list');
 	// gui
 	
-	var slistGroupProduct = '<ul><li>Coffee</li><li>Tea</li></ul>';
-	$("#groupProductsList").html(slistGroupProduct);
+	var slistGroupProduct = '';
+	var aProducts = returnData.products;
+	console.dir(aProducts);
+	var bIsArray = Array.isArray(aProducts);
+		console.log('>>> Products in group: '+ bIsArray +'');
+
+		if (bIsArray == true) {
+			var iArrayLength = aProducts.length;
+			for (var i = 0; i < iArrayLength; i++) {
+				var sProducts = aProducts[i].name
+				var sStatus = aProducts[i].status
+				if (sStatus == false){
+					var sColor = 'grey';
+				}
+				else {
+					var sColor = 'green';
+				}
+				$("#lstGroupProductsList").append('<li id="' +sProducts +'" class="lstGroupProductItem" style="background-color:' + sColor +';">' +sProducts +'</li><input type="hidden" value=' +sStatus +'>')
+			}
+		}
+		
+	$(".lstGroupProductItem").click(function(){
+		var sProductname = $(this).attr('id');
+		var sCurrentValue = $(this).closest('div');
+		sCurrentValue = $(this).next('input').val();
+		if (sCurrentValue == 'true') {
+			sToggleValue = 'false';
+		} else {
+			sToggleValue = 'true';
+		}
+		
+		SaveGroupConfig(sGroupname, sToggleValue, sProductname);
+		
+		// You can call Franks function just passing the togglevalue ! Also add the product !!!!
+		// SaveGroupConfig(sGroupName, sToggleValue, sProductname);
+		console.log('now it is:'+ sCurrentValue + ', and we will set it to:' + sToggleValue +' for '+ sProductname);
+		console.log('HERE WE GO >>>>>>>>');
+		$(this).next('input').val(sToggleValue);
+		console.log('done!');
+	});	
+		
+		
+		
+		
 	$(".pageContainer").hide();
 	$("#pageConfigureGroup").show();
 }
