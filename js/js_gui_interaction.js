@@ -148,7 +148,7 @@ function SetGroup(returnData){
 		// Create orderlist
 		console.log('>>> done !');
 }
-function SetGroupProducts(){
+function SetGroupProducts(returnData){
 	console.log('starting SetGroupProducts(object)');
 	// system
 	var sGroupname = returnData.groupname;

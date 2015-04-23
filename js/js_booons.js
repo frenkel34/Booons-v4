@@ -128,7 +128,7 @@ function StartRoundInGroup(sGroupname,sDeviceId) {
 }
 
 function GetGroupConfig(sGroupname) {
-	console.log('starting GetGroupConfig('+ sGroupname +')');
+	console.log('starting... GetGroupConfig('+ sGroupname +')');
 	var sMethode		= 'GetGroupProducts';
 	var sStartRound		= 'yes'
 	var sQueryString 	= 'groupname='+ sGroupname +'&method='+sMethode;
