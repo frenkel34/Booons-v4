@@ -70,18 +70,20 @@
 			<h1>ERROR ON API !!!!!!!!!!!</h1>
 		</div>
 		<div id="pageGroupIdle" class="pageContainer">
+<!-- start example -->
 			<div id="tstDiv1">
-				<li class="itmTest">test button1</li><input id="txtTestVar1" type="text" value="true">
+				<li id="productname1" class="itmTest">test button1</li><input id="txtTestVar1" type="text" value="true">
 			</div>
 			<div id="tstDiv2">
-				<li class="itmTest">test button2</li><input id="txtTestVar2" type="text" value="false">
+				<li id="productname2" class="itmTest">test button2</li><input id="txtTestVar2" type="text" value="false">
 			</div>
 			<div id="tstDiv3">
-				<li class="itmTest">test button3</li><input id="txtTestVar3" type="text" value="true">
+				<li id="productname3" class="itmTest">test button3</li><input id="txtTestVar3" type="text" value="true">
 			</div>
 
 				<script>
 				$(".itmTest").click(function(){
+					var sProductname = $(this).attr('id');
 					var sCurrentValue = $(this).closest('div');
 					sCurrentValue = $(this).next('input').val();
 					if (sCurrentValue == 'true') {
@@ -89,13 +91,17 @@
 					} else {
 						sToggleValue = 'true';
 					}
-					console.log('now it is:'+ sCurrentValue + ', and we will set it to:' + sToggleValue);
+					
+					// You can call Franks function just passing the togglevalue ! Also add the product !!!!
+					// SaveGroupConfig(sToggleValue, sProductname);
+					console.log('now it is:'+ sCurrentValue + ', and we will set it to:' + sToggleValue +' for '+ sProductname);
 					console.log('HERE WE GO >>>>>>>>');
 					$(this).next('input').val(sToggleValue);
 					console.log('done!');
 					
 				});	
 			</script>
+<!-- end of example please remove this crap! -->
 			<h2 class="lblGroupName">[Groupname]</h2>
 			<input type="button" value="view users" id="btnUserList"><br />
 			<input type="button" value="view group" id="btnGroupDetails"><br /><br />
