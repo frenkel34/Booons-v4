@@ -164,6 +164,7 @@ function SetGroupProducts(returnData){
 
 		if (bIsArray == true) {
 			var iArrayLength = aProducts.length;
+			$("#lstGroupProductsList").html('');
 			for (var i = 0; i < iArrayLength; i++) {
 				var sProducts = aProducts[i].name
 				var sStatus = aProducts[i].status

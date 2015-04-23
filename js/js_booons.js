@@ -151,7 +151,7 @@ function GetGroupConfig(sGroupname) {
 
 function SaveGroupConfig(sGroupname, sProductStatus, sProductname) {
 	console.log('starting SaveGroupConfig('+ sGroupname +', '+ sProductStatus +', '+ sProductname +')');
-	var sMethode		= 'GetGroupConfig';
+	var sMethode		= 'GetGroupProducts';
 	var sGroupname		= sGroupname;
 	var sProductStatus	= sProductStatus;
 	var sProductname	= sProductname;
