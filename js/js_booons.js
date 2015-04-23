@@ -149,3 +149,30 @@ function GetGroupConfig(sGroupname) {
 	});
 }
 
+function SaveGroupConfig(sGroupname, sProductStatus, sProductname) {
+	console.log('starting SaveGroupConfig('+ sGroupname +', '+ sProductStatus +', '+ sProductname +')');
+	var sMethode		= 'GetGroupConfig';
+	var sGroupname		= sGroupname;
+	var sProductStatus	= sProductStatus;
+	var sProductname	= sProductname;
+	var sQueryString 	= 'groupname='+ sGroupname +'&productstatus='+ sProductStatus +'&productname='+ sProductname +'&saveproductingroup=yes&method='+sMethode;
+	var sHashKey 		= "";
+	var sHashKey 		= CryptoJS.SHA1(sQueryString).toString();
+	  
+	  $.getJSON( "http://www.booons.nl/apiv4/apiv4.asp?jsoncallback=?", {
+	    groupname: sGroupname,
+		productstatus: sProductStatus,
+		productname: sProductname,
+		saveproductingroup: 'yes',
+	    method: sMethode,
+	    hashKey: sHashKey
+	  })
+	    .done(function( data ) {
+			$(function(){
+				console.log('Result for SaveGroupConfig:');
+				console.dir( data );
+				SetGroupProducts( data );
+		});	    	
+	});
+}
+
