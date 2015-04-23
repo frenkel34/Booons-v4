@@ -126,3 +126,26 @@ function StartRoundInGroup(sGroupname,sDeviceId) {
 		});	    	
 	});
 }
+
+function GetGroupConfig(sGroupname) {
+	console.log('starting GetGroupConfig('+ sGroupname +')');
+	var sMethode		= 'GetGroupProducts';
+	var sStartRound		= 'yes'
+	var sQueryString 	= 'groupname='+ sGroupname +'&method='+sMethode;
+	var sHashKey 		= "";
+	var sHashKey 		= CryptoJS.SHA1(sQueryString).toString();
+	  
+	  $.getJSON( "http://localhost/apiv4/Server/apiv4.asp?jsoncallback=?", {
+	    groupname: sGroupname,
+	    method: sMethode,
+	    hashKey: sHashKey
+	  })
+	    .done(function( data ) {
+			$(function(){
+				console.log('Result for GetGroupConfig:');
+				console.dir( data );
+				SetGroupProducts( data );
+		});	    	
+	});
+}
+
