@@ -1,5 +1,5 @@
 function CheckStatus() {
-	$.ajax({url: "http://localhost/apiv4/Server/apiv4.asp?method=checkstatus",
+	$.ajax({url: "http://www.booons.nl/apiv4/apiv4.asp?method=checkstatus",
 			dataType: "jsonp",
 			statusCode: {
 				500: function (response) {
@@ -22,7 +22,7 @@ function GetDeviceDefaults(sDeviceId){
 	var sQueryString 	= 'deviceid='+ sDeviceId +'&method='+sMethode;
 	var sHashKey 		= "";
 	var sHashKey 		= CryptoJS.SHA1(sQueryString).toString();
-	$.getJSON( "http://localhost/apiv4/Server/apiv4.asp?jsoncallback=?", {
+	$.getJSON( "http://www.booons.nl/apiv4/apiv4.asp?jsoncallback=?", {
 		deviceid: sDeviceId,
 		method: sMethode,
 		hashKey: sHashKey
@@ -37,7 +37,7 @@ function LoginUser(sDeviceId, sUsername, sGroupname){
 	var sQueryString 	= 'deviceid='+ sDeviceId +'username='+ sUsername +'groupname='+ sGroupname +'&method='+sMethode;
 	var sHashKey 		= "";
 	var sHashKey 		= CryptoJS.SHA1(sQueryString).toString();
-	  $.getJSON( "http://localhost/apiv4/Server/apiv4.asp?jsoncallback=?", {
+	  $.getJSON( "http://www.booons.nl/apiv4/apiv4.asp?jsoncallback=?", {
 	    deviceid: sDeviceId,
 	    username: sUsername,
 	    groupname: sGroupname,
@@ -54,7 +54,7 @@ function GetMessages(){
 	var sQueryString 	= '&method='+sMethode;
 	var sHashKey 		= "";
 	var sHashKey 		= CryptoJS.SHA1(sQueryString).toString();
-	$.getJSON( "http://localhost/apiv4/Server/apiv4.asp?jsoncallback=?", {
+	$.getJSON( "http://www.booons.nl/apiv4/apiv4.asp?jsoncallback=?", {
 		method: sMethode,
 		hashKey: sHashKey
 	})
@@ -70,7 +70,7 @@ function GetGroup(sGroupname){
 	var sHashKey 		= "";
 	var sHashKey 		= CryptoJS.SHA1(sQueryString).toString();
 	  
-	  $.getJSON( "http://localhost/apiv4/Server/apiv4.asp?jsoncallback=?", {
+	  $.getJSON( "http://www.booons.nl/apiv4/apiv4.asp?jsoncallback=?", {
 	    groupname: sGroupname,
 	    method: sMethode,
 	    hashKey: sHashKey
@@ -111,7 +111,7 @@ function StartRoundInGroup(sGroupname,sDeviceId) {
 	var sHashKey 		= "";
 	var sHashKey 		= CryptoJS.SHA1(sQueryString).toString();
 	  
-	  $.getJSON( "http://localhost/apiv4/Server/apiv4.asp?jsoncallback=?", {
+	  $.getJSON( "http://www.booons.nl/apiv4/apiv4.asp?jsoncallback=?", {
 		deviceid: sDeviceId,
 	    groupname: sGroupname,
 		startround: sStartRound,
@@ -135,7 +135,7 @@ function GetGroupConfig(sGroupname) {
 	var sHashKey 		= "";
 	var sHashKey 		= CryptoJS.SHA1(sQueryString).toString();
 	  
-	  $.getJSON( "http://localhost/apiv4/Server/apiv4.asp?jsoncallback=?", {
+	  $.getJSON( "http://www.booons.nl/apiv4/apiv4.asp?jsoncallback=?", {
 	    groupname: sGroupname,
 	    method: sMethode,
 	    hashKey: sHashKey
