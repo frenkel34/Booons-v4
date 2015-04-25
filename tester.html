@@ -75,7 +75,7 @@
 			<input type="button" value="view group" id="btnGroupDetails"><br /><br />
 			<div id="divStartRound">
 				<input type="button" value="start round" id="btnStartRound"><br /><br />
-				<input type="button" value="See products" id="btSeeGroupProduct"><br /><br />			
+				<input type="button" value="See products" id="btnGroupProduct"><br /><br />			
 			</div>
 			<div id="divUsers">
 				<p>These users are logged in</p>
@@ -111,7 +111,7 @@
 				$("#divUsers").hide();
 				$("#divStatus").show();
 			});
-			$("#btSeeGroupProduct").click(function(){
+			$("#btnGroupProduct").click(function(){
 				var sGroupname 	= $("#dbgGroupname").val();
 				GetGroupConfig(sGroupname);
 			});
@@ -125,10 +125,24 @@
 		</div>
 		<div id="pageConfigureGroup" class="pageContainer">
 			<h2>Configure Group's drinks</h2>
-			<div id="groupProductsList">
+			<div id="divProductsList">
 				<ul id="lstGroupProductsList">
 				</ul>
 				<input type="button" value="Group" id="btnGroupDetail"><br /><br />			
+				<script>
+					$("#btnGroupDetail").click(function(){
+						var sGroupname = $("#dbgGroupname").val();
+						GetGroup(sGroupname);
+					});		
+				</script>
+			</div>
+		</div>
+		<div id="pageOrderProduct" class="pageContainer">
+			<h2>What you want to drink?</h2>
+			<div id="divProductsList">
+				<ul id="lstOrderProductsList">
+				</ul>
+				<input type="button" value="Cancel" id="btnGroupDetail"><br /><br />			
 				<script>
 					$("#btnGroupDetail").click(function(){
 						var sGroupname = $("#dbgGroupname").val();

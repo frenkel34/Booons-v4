@@ -122,7 +122,7 @@ function StartRoundInGroup(sGroupname,sDeviceId) {
 			$(function(){
 				console.log('Result for StartRoundInGroup:');
 				console.dir( data );
-				SetGroup( data );
+				SetOrderProduct( data );
 		});	    	
 	});
 }

@@ -149,6 +149,11 @@ function SetGroup(returnData){
 		console.log('>>> done !');
 }
 
+function SetOrderProduct(returnData) {
+	alert('Im setting orders and ambushes and than return to group');
+	SetGroup(returnData);
+}
+
 function SetGroupProducts(returnData){
 	console.log('starting SetGroupProducts(object)');
 	// system
