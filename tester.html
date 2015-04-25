@@ -128,6 +128,13 @@
 			<div id="groupProductsList">
 				<ul id="lstGroupProductsList">
 				</ul>
+				<input type="button" value="Group" id="btnGroupDetail"><br /><br />			
+				<script>
+					$("#btnGroupDetail").click(function(){
+						var sGroupname = $("#dbgGroupname").val();
+						GetGroup(sGroupname);
+					});		
+				</script>
 			</div>
 		</div>
 		<div id="" class="debug">
