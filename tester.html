@@ -139,22 +139,24 @@
 			</div>
 		</div>
 		<div id="pageOrderProduct" class="pageContainer">
-			<h2>What you want to drink?</h2>
-			<input type="text" value="" id="txtSelectedProduct">
-			<input type="text" value="0" id="txtSelectedProductOptionsugar">
-			<input type="text" value="0" id="txtSelectedProductOptionsweetner">
-			<input type="text" value="0" id="txtSelectedProductOptionmilk">
-			<div id="divProductsList">
-				<div id="lstOrderProductsList">
+			<h2>What you want to drink - take 2?</h2>
+			<div id="products">
+				<div id="productitem">
+					<div id="productlabel">Coffee</div>
+					<div class="productoptions">
+						<div id="productoptionsugar">
+							<img width="20px" src="img/sugar1.png" />
+							<img width="20px" src="img/sugar2.png" />
+							<img width="20px" src="img/sugar2.png" />
+						</div>
+						<div id="productoptionsweetner">
+							<img width="20px" src="img/sweetner1.png" />
+							<img width="20px" src="img/sweetner2.png" />
+							<img width="20px" src="img/sweetner2.png" />
+						</div>
+					</div>
 				</div>
 			</div>
-			<input type="button" value="Cancel" id="btnGroupDetail2"><br /><br />			
-			<script>
-				$("#btnGroupDetail2").click(function(){
-					var sGroupname = $("#dbgGroupname").val();
-					GetGroup(sGroupname);
-				});		
-			</script>
 		</div>
 		<div id="" class="debug">
 			<h2>Debug info and hidden values</h2>
@@ -162,7 +164,10 @@
 			<input type="text" id="dbgUsername" value="">
 			<input type="text" id="dbgGroupname" value="">
 			<input type="text" id="dbgPoints" value="">	
-
+			<input type="text" id="dbgSelectedProduct">
+			<input type="text" id="dbgSelectedProductOptionsugar">
+			<input type="text" id="dbgSelectedProductOptionsweetner">
+			<input type="text" id="dbgSelectedProductOptionmilk">
 		</div>
 	</body>
 	<script>
