@@ -134,12 +134,13 @@ function GetGroupConfig(sGroupname) {
 	console.log('starting... GetGroupConfig('+ sGroupname +')');
 	var sMethode		= 'GetGroupProducts';
 	var sStartRound		= 'yes'
-	var sQueryString 	= 'groupname='+ sGroupname +'&method='+sMethode;
+	var sQueryString 	= 'groupname='+ sGroupname +'&config=yes&method='+sMethode;
 	var sHashKey 		= "";
 	var sHashKey 		= CryptoJS.SHA1(sQueryString).toString();
 	  
 	  $.getJSON( sAPIServer + "apiv4.asp?jsoncallback=?", {
 	    groupname: sGroupname,
+		config: 'yes',
 	    method: sMethode,
 	    hashKey: sHashKey
 	  })
@@ -155,12 +156,14 @@ function GetGroupConfig(sGroupname) {
 function GetOrderProduct(sGroupname, sUsername) {
 	console.log('starting GetOrderProduct('+ sGroupname +')');
 	var sMethode		= 'GetGroupProducts';
-	var sQueryString 	= 'groupname='+ sGroupname +'&username='+ sUsername +'method='+sMethode;
+	var sQueryString 	= 'groupname='+ sGroupname +'&username='+ sUsername +'&config=no&method='+sMethode;
 	var sHashKey 		= "";
 	var sHashKey 		= CryptoJS.SHA1(sQueryString).toString();
 	  
 	  $.getJSON( sAPIServer + "apiv4.asp?jsoncallback=?", {
 	    groupname: sGroupname,
+		username: sUsername,
+		config: 'no',
 	    method: sMethode,
 	    hashKey: sHashKey
 	  })
@@ -200,4 +203,60 @@ function SaveGroupConfig(sGroupname, sProductStatus, sProductname) {
 		});	    	
 	});
 }
+
+function SaveOrder(sGroupname, sUsername, sProduct, sSugar, sSweetner, sMilk) {
+	console.log('starting SaveOrder('+sGroupname+', '+sUsername+', '+sProduct+', '+sSugar+', '+sSweetner+', '+sMilk+')');
+	var sMethode		= 'SaveOrder';
+	var sGroupname		= sGroupname;
+	var sProductStatus	= sProductStatus;
+	var sProductname	= sProductname;
+	var sQueryString 	= 'groupname='+ sGroupname +'&username='+ sUsername +'&product='+ sProduct +'&sugar='+ sSugar +'&sweetner='+ sSweetner +'&milk='+ sMilk +'&method='+sMethode;
+	var sHashKey 		= "";
+	var sHashKey 		= CryptoJS.SHA1(sQueryString).toString();
+	  
+	  $.getJSON( sAPIServer + "apiv4.asp?jsoncallback=?", {
+	    groupname: sGroupname,
+		username: sUsername,
+		product: sProduct,
+		sugar: sSugar,
+		sweetner: sSweetner,
+		milk: sMilk,
+	    method: sMethode,
+	    hashKey: sHashKey
+	  })
+	    .done(function( data ) {
+			$(function(){
+				console.log('Result for SaveOrder:');
+				console.dir( data );
+				alert('ambush screen !');
+				GetOrderAmbushes(sGroupname, sUsername);
+				// SetGroup( data );
+		});	    	
+	});
+}
+
+function GetOrderAmbushes(sGroupname, sUsername) {
+	console.log('starting GetOrderAmbushes('+ sGroupname +', '+ sUsername +')');
+	var sMethode		= 'GetOrderAmbushes';
+	var sQueryString 	= 'groupname='+ sGroupname +'&username='+ sUsername +'&config=no&method='+sMethode;
+	var sHashKey 		= "";
+	var sHashKey 		= CryptoJS.SHA1(sQueryString).toString();
+	  
+	  $.getJSON( sAPIServer + "apiv4.asp?jsoncallback=?", {
+	    groupname: sGroupname,
+		username: sUsername,
+		config: 'no',
+	    method: sMethode,
+	    hashKey: sHashKey
+	  })
+	    .done(function( data ) {
+			$(function(){
+				console.log('Result for GetOrderAmbushes:');
+				console.dir( data );
+//				alert('just got the product list and ready to show to get the order');
+				SetOrderAmbushes( data, sUsername );
+		});	    	
+	});
+}	
+
 
