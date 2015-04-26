@@ -149,9 +149,90 @@ function SetGroup(returnData){
 		console.log('>>> done !');
 }
 
-function SetOrderProduct(returnData) {
-	alert('Im setting orders and ambushes and than return to group');
-	SetGroup(returnData);
+function SetOrderProducts(returnData) {
+//	alert('Im setting orders and ambushes and than return to group');
+	// system
+	var sGroupname = returnData.groupName;
+	// debug
+	console.log('Showing list of products to order');
+	// gui	
+	var aProducts = returnData.products;
+	console.dir(aProducts);
+	var bIsArray = Array.isArray(aProducts);
+	console.log('>>> Products in group to order from: '+ bIsArray +'');
+
+	$("#lstOrderProductsList").html('');
+	if (bIsArray == true) {
+		var iArrayLength = aProducts.length;
+		for (var iPrd = 0; iPrd < iArrayLength; iPrd++) {
+			var sProducts	= aProducts[iPrd].name
+			var sStatus 	= aProducts[iPrd].status
+			var sSugar		= aProducts[iPrd].sugar
+			var sSweetner	= aProducts[iPrd].sweetner
+			var sMilk		= aProducts[iPrd].milk
+			var sHtml 		= ''
+				if (sStatus == true) {
+					sHtml = '<div style="border: solid 1px black;" id="'+ sProducts +'" class="lstOrderProductItem">'+ sProducts;
+					sHtml = sHtml + '<div style="border: solid 1px red; display:none; background-color:#111;" id="'+ sProducts +'_options" class="lstOrderProductSubItem">';
+					if (sSugar > 0) {
+						var sOptionname = 'sugar';
+						sHtml = sHtml + '<div id="'+ sProducts +'_'+ sOptionname +'">'
+						for (var iCnt = 0; iCnt < 3; iCnt++) {
+							sHtml = sHtml + '<div style="color:#c5c5c5;" productname="'+ sProducts +'" optionname="'+ sOptionname +'" optionvalue="'+ iCnt +'"  id="'+ sProducts + sOptionname + iCnt  +'" class="lstOrderProductSubItemOption" style="width:100px">['+ iCnt  +'] '+ sOptionname +'</div>'
+						}
+						sHtml = sHtml + '</div>'
+					};					
+					if (sSweetner > 0) {
+						var sOptionname = 'sweetner';
+						sHtml = sHtml + '<div id="'+ sProducts +'_'+ sOptionname +'">'
+						for (var iCnt = 0; iCnt < 3; iCnt++) {
+							sHtml = sHtml + '<div style="color:#c5c5c5;" productname="'+ sProducts +'" optionname="'+ sOptionname +'" optionvalue="'+ iCnt +'"  id="'+ sProducts + sOptionname + iCnt  +'" class="lstOrderProductSubItemOption" style="width:100px">['+ iCnt  +'] '+ sOptionname +'</div>'
+						}
+						sHtml = sHtml + '</div>'
+					};					
+					
+					sHtml = sHtml + '</div>'
+					$("#lstOrderProductsList").append(sHtml);
+				};
+
+			sHtml = sHtml + '</div>'
+			}
+}
+	$(".lstOrderProductSubItemOption").click(function(){
+		var sClickedOption 	= $(this).attr('optionname');
+		var sClickedValue 	= $(this).attr('optionvalue');
+		var sProductname		= $(this).attr('productname');
+//		alert('Selected: '+ sProductname +' with '+ sClickedValue +' '+sClickedOption);
+		var idName = sProductname + sClickedOption ;
+		if (sClickedValue >= 0){
+			$("#"+ idName +'0').css({"color": "red"});
+		} else {
+			$("#"+ idName +'0').css({"color": "white"});		
+		}
+		if (sClickedValue >= 1){
+			$("#"+ idName +'1').css({"color": "red"});
+		} else {
+			$("#"+ idName +'1').css({"color": "white"});		
+		}
+		if (sClickedValue >= 2){
+			$("#"+ idName+'2').css({"color": "red"});
+		} else {
+			$("#"+ idName +'2').css({"color": "white"});		
+		}
+		
+		
+	});
+	$(".lstOrderProductSubItem").hide();
+	$(".lstOrderProductItem").click(function(){
+		var sProductname = $(this).attr('id');
+		var sCurrentValue = $(this).closest('div');
+		$(".lstOrderProductSubItem").hide();
+		$("#"+sProductname+"_options").show();
+		
+	});
+	$(".pageContainer").hide();
+	$("#pageOrderProduct").show();
+// 	SetGroup(returnData);
 }
 
 function SetGroupProducts(returnData){

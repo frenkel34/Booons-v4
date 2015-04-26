@@ -40,7 +40,7 @@
 			}
 		</style>
 
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		<script src="js/jquery.min.js"></script>
 		<script type="text/javascript" charset="utf-8" src="js/js_sha1.js"></script>
 		<script type="text/javascript" charset="utf-8" src="js/js_booons.js"></script>
 		<script type="text/javascript" charset="utf-8" src="js/js_gui_interaction.js"></script>
@@ -107,7 +107,8 @@
 			$("#btnStartRound").click(function(){
 				var sGroupname 	= $("#dbgGroupname").val();
 				var sDeviceId	= $("#dbgDeviceId").val();
-				StartRoundInGroup(sGroupname, sDeviceId);
+				var sUsername	= $("#dbgUsername").val();
+				StartRoundInGroup(sGroupname, sDeviceId, sUsername);
 				$("#divUsers").hide();
 				$("#divStatus").show();
 			});
@@ -140,16 +141,16 @@
 		<div id="pageOrderProduct" class="pageContainer">
 			<h2>What you want to drink?</h2>
 			<div id="divProductsList">
-				<ul id="lstOrderProductsList">
-				</ul>
-				<input type="button" value="Cancel" id="btnGroupDetail"><br /><br />			
-				<script>
-					$("#btnGroupDetail").click(function(){
-						var sGroupname = $("#dbgGroupname").val();
-						GetGroup(sGroupname);
-					});		
-				</script>
+				<div id="lstOrderProductsList">
+				</div>
 			</div>
+			<input type="button" value="Cancel" id="btnGroupDetail2"><br /><br />			
+			<script>
+				$("#btnGroupDetail2").click(function(){
+					var sGroupname = $("#dbgGroupname").val();
+					GetGroup(sGroupname);
+				});		
+			</script>
 		</div>
 		<div id="" class="debug">
 			<h2>Debug info and hidden values</h2>

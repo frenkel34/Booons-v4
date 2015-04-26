@@ -1,5 +1,7 @@
+var sAPIServer = 'http://www.booons.nl/apiv4/';
+
 function CheckStatus() {
-	$.ajax({url: "http://www.booons.nl/apiv4/apiv4.asp?method=checkstatus",
+	$.ajax({url: sAPIServer + "apiv4.asp?method=checkstatus",
 			dataType: "jsonp",
 			statusCode: {
 				500: function (response) {
@@ -22,7 +24,7 @@ function GetDeviceDefaults(sDeviceId){
 	var sQueryString 	= 'deviceid='+ sDeviceId +'&method='+sMethode;
 	var sHashKey 		= "";
 	var sHashKey 		= CryptoJS.SHA1(sQueryString).toString();
-	$.getJSON( "http://www.booons.nl/apiv4/apiv4.asp?jsoncallback=?", {
+	$.getJSON( sAPIServer + "apiv4.asp?jsoncallback=?", {
 		deviceid: sDeviceId,
 		method: sMethode,
 		hashKey: sHashKey
@@ -37,7 +39,7 @@ function LoginUser(sDeviceId, sUsername, sGroupname){
 	var sQueryString 	= 'deviceid='+ sDeviceId +'username='+ sUsername +'groupname='+ sGroupname +'&method='+sMethode;
 	var sHashKey 		= "";
 	var sHashKey 		= CryptoJS.SHA1(sQueryString).toString();
-	  $.getJSON( "http://www.booons.nl/apiv4/apiv4.asp?jsoncallback=?", {
+	  $.getJSON( sAPIServer + "apiv4.asp?jsoncallback=?", {
 	    deviceid: sDeviceId,
 	    username: sUsername,
 	    groupname: sGroupname,
@@ -54,7 +56,7 @@ function GetMessages(){
 	var sQueryString 	= '&method='+sMethode;
 	var sHashKey 		= "";
 	var sHashKey 		= CryptoJS.SHA1(sQueryString).toString();
-	$.getJSON( "http://www.booons.nl/apiv4/apiv4.asp?jsoncallback=?", {
+	$.getJSON( sAPIServer + "apiv4/apiv4.asp?jsoncallback=?", {
 		method: sMethode,
 		hashKey: sHashKey
 	})
@@ -70,7 +72,7 @@ function GetGroup(sGroupname){
 	var sHashKey 		= "";
 	var sHashKey 		= CryptoJS.SHA1(sQueryString).toString();
 	  
-	  $.getJSON( "http://www.booons.nl/apiv4/apiv4.asp?jsoncallback=?", {
+	  $.getJSON( sAPIServer + "apiv4.asp?jsoncallback=?", {
 	    groupname: sGroupname,
 	    method: sMethode,
 	    hashKey: sHashKey
@@ -103,7 +105,7 @@ function countdown_timer(){
   }
 }
 
-function StartRoundInGroup(sGroupname,sDeviceId) {
+function StartRoundInGroup(sGroupname,sDeviceId, sUsername) {
 	console.log('starting StartRoundInGroup('+ sGroupname +')');
 	var sMethode		= 'GetGroup';
 	var sStartRound		= 'yes'
@@ -111,7 +113,7 @@ function StartRoundInGroup(sGroupname,sDeviceId) {
 	var sHashKey 		= "";
 	var sHashKey 		= CryptoJS.SHA1(sQueryString).toString();
 	  
-	  $.getJSON( "http://www.booons.nl/apiv4/apiv4.asp?jsoncallback=?", {
+	  $.getJSON( sAPIServer + "apiv4.asp?jsoncallback=?", {
 		deviceid: sDeviceId,
 	    groupname: sGroupname,
 		startround: sStartRound,
@@ -122,7 +124,8 @@ function StartRoundInGroup(sGroupname,sDeviceId) {
 			$(function(){
 				console.log('Result for StartRoundInGroup:');
 				console.dir( data );
-				SetOrderProduct( data );
+				GetOrderProduct(sGroupname, sUsername)
+				// SetOrderProduct( data );
 		});	    	
 	});
 }
@@ -135,7 +138,7 @@ function GetGroupConfig(sGroupname) {
 	var sHashKey 		= "";
 	var sHashKey 		= CryptoJS.SHA1(sQueryString).toString();
 	  
-	  $.getJSON( "http://www.booons.nl/apiv4/apiv4.asp?jsoncallback=?", {
+	  $.getJSON( sAPIServer + "apiv4.asp?jsoncallback=?", {
 	    groupname: sGroupname,
 	    method: sMethode,
 	    hashKey: sHashKey
@@ -145,6 +148,28 @@ function GetGroupConfig(sGroupname) {
 				console.log('Result for GetGroupConfig:');
 				console.dir( data );
 				SetGroupProducts( data );
+		});	    	
+	});
+}
+
+function GetOrderProduct(sGroupname, sUsername) {
+	console.log('starting GetOrderProduct('+ sGroupname +')');
+	var sMethode		= 'GetGroupProducts';
+	var sQueryString 	= 'groupname='+ sGroupname +'&username='+ sUsername +'method='+sMethode;
+	var sHashKey 		= "";
+	var sHashKey 		= CryptoJS.SHA1(sQueryString).toString();
+	  
+	  $.getJSON( sAPIServer + "apiv4.asp?jsoncallback=?", {
+	    groupname: sGroupname,
+	    method: sMethode,
+	    hashKey: sHashKey
+	  })
+	    .done(function( data ) {
+			$(function(){
+				console.log('Result for GetOrderProduct:');
+				console.dir( data );
+//				alert('just got the product list and ready to show to get the order');
+				SetOrderProducts( data );
 		});	    	
 	});
 }
@@ -159,7 +184,7 @@ function SaveGroupConfig(sGroupname, sProductStatus, sProductname) {
 	var sHashKey 		= "";
 	var sHashKey 		= CryptoJS.SHA1(sQueryString).toString();
 	  
-	  $.getJSON( "http://www.booons.nl/apiv4/apiv4.asp?jsoncallback=?", {
+	  $.getJSON( sAPIServer + "apiv4.asp?jsoncallback=?", {
 	    groupname: sGroupname,
 		productstatus: sProductStatus,
 		productname: sProductname,
