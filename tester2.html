@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html >
+	<head>
+		<meta charset="UTF-8">
+		<style>
+			body,input{
+				font-family:calibri;
+				font-size:12px;
+				line-height:30px;
+			} 
+			#pageContainer{
+				display:none;
+			}
+			
+			#fullContainer {
+				background-color:#c5c5c5;
+				width:100%;
+				min-height: 600px;
+				overflow: auto;
+			}
+			input {
+				width:100%;
+				height:30px;
+				margin:0px;
+				line-height:15px;
+				margin-top:5px;
+			}
+			.debug{
+				color: #eee;
+			
+			}
+			.debug input{ 
+				color: #fdd;
+				border-color: #fdd;
+				border-style:solid;
+				border-width:1px;
+			}
+			#divStatus {
+				display:none;
+			}
+		</style>
+		
+		<!-- Style for Quinte to adapt it to Bootsrap -->
+		<style>
+			#btnLoginNotMe p{
+				color: #ffffff;
+			}
+		</style>
+		
+		
+
+		<script src="js/jquery.min.js"></script>
+		<script type="text/javascript" charset="utf-8" src="js/js_sha1.js"></script>
+		<script type="text/javascript" charset="utf-8" src="js/js_booons.js"></script>
+		<script type="text/javascript" charset="utf-8" src="js/js_gui_interaction.js"></script>
+		<script src="js/jquery.countdown360.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" href="css/bootstrap.css">
+		<link rel="stylesheet" href="css/custom.css">
+	</head>
+	<body>
+		
+		<!-- GLOBAL Header -->
+		<nav class="navbar navbar-default">
+		  <div class="container">
+		    <div class="navbar-header">
+		      <a class="navbar-brand" href="#">
+		        <img alt="Booons" src="images/logo.svg" height="37" width="69">
+		      </a>
+		    </div>
+		  </div>
+		</nav><!-- END - Header -->
+		
+		<!-- START - Page Login -->
+		<div id="pageLogin" class="pageContainer">
+		
+			<!-- Container -->
+			<div class="container text-center">		
+				<div class="col-sm-12">
+			      <div class="icon">
+			      	<img alt="User" class="center" src="images/user.svg" height="30" width="23">
+			      </div>
+			      <input type="text" class="form-control icon" id="txtUsername" placeholder="Username">
+			      <span id="lblUsername"></span>
+			    </div>
+				<div class="col-sm-12">
+			    	<div class="icon">
+			    		<img alt="Group" class="icon" src="images/group.svg" height="33" width="39">
+			    	</div>
+			      <input type="text" class="form-control icon" id="txtGroupname" placeholder="Group">
+			      <span id="lblGroupname"></span>
+			    </div>
+				<button id="btnLogin" type="submit" class="btn btn-circle"><img alt=">" class="icon" src="images/next_btn.svg" height="30" width="30"></button>	
+			</div><!-- END - Container -->				
+			<!-- Footer -->
+			<footer class="footer">
+		      <div id="btnLoginNotMe" class="container text-center">
+		        <p class="text-muted">Thats not me</p>
+		      </div>
+		    </footer><!-- END - Footer -->	
+		    <script>
+					$("#btnLogin").click(function(){
+						var sUsername 	= $("#txtUsername").val();
+						var sGroupname 	= $("#txtGroupname").val();
+						var sDeviceId 	= $("#dbgDeviceId").val();
+						LoginUser(sDeviceId, sUsername, sGroupname);
+					});
+					$("#btnLoginNotMe").click(function(){
+						cleanLoginForm();
+					});			
+				</script>	
+		</div>
+		<!-- END - Page Login -->
+				
+		<!-- START - Page Stop App -->
+		<div id="pageStopApp" class="pageContainer">
+			<h1>ERROR ON API !!!!!!!!!!!</h1>
+		</div>
+		<!-- END - Page Stop App -->
+		
+		<!-- START - Page Group Idle -->
+		<div id="pageGroupIdle" class="pageContainer">
+			<h2 class="lblGroupName">[Groupname]</h2>
+			<input type="button" value="view users" id="btnUserList"><br />
+			<input type="button" value="view group" id="btnGroupDetails"><br /><br />
+			<input type="button" value="config products" id="btnGroupProduct"><br /><br />			
+			<div id="divStartRound">
+				<input type="button" value="start round" id="btnStartRound"><br /><br />
+			</div>
+			<div id="divUsers">
+				<p>These users are logged in</p>
+				<ul id="lstUsers">
+				</ul>	
+			</div>
+			<div id="divRoundOpen">
+				<input type="button" value="order" id="btnOrder"><br /><br />
+				<div id="divPoints" class="text-center">
+					
+				</div>
+				<div id="divAmbushes">
+					
+				</div>
+				<!-- OLD Countdown
+				<div id="divCountDown">
+					Time left: <span id="lblCountDown">999</span>
+				</div>-->	
+				<div id="countdown" class="text-center"></div>
+				</div>	
+			</div>
+			<div id="divStatus">
+				status...
+			<script>
+			$("#btnOrder").click(function(){
+				var sGroupname 	= $("#dbgGroupname").val();
+				var sUsername	= $("#dbgUsername").val();
+				GetOrderProduct(sGroupname, sUsername);
+			});
+			
+			$("#btnSubmit2").click(function(){
+				var sGroupname = $("#dbgGroupname").val();
+				console.log('Start test for GetGroup');
+				GetGroup(sGroupname);
+			});		
+			$("#btnUserList").click(function(){
+				$("#divUsers").show();
+				$("#divStatus").hide();
+			});		
+			$("#btnGroupDetails").click(function(){
+				$("#divUsers").hide();
+				$("#divStatus").show();
+			});
+			$("#btnStartRound").click(function(){
+				var sGroupname 	= $("#dbgGroupname").val();
+				var sDeviceId	= $("#dbgDeviceId").val();
+				var sUsername	= $("#dbgUsername").val();
+				StartRoundInGroup(sGroupname, sDeviceId, sUsername);
+				$("#divUsers").hide();
+				$("#divStatus").show();
+			});
+			$("#btnGroupProduct").click(function(){
+				var sGroupname 	= $("#dbgGroupname").val();
+				GetGroupConfig(sGroupname);
+			});
+			</script>
+		</div>
+		<!-- END - Page Group Idle -->
+		
+		<!-- START - Page Logged In -->
+		<div id="pageLoggedIn" class="pageContainer">
+			<h2 class="lblGroupName">Welcome</h2>
+			<p>Welkom in de groep !</p>
+			<ul id="lstMessages">
+			</ul>			
+		</div>
+		<div id="pageConfigureGroup" class="pageContainer">
+			<h2>Configure Group's drinks</h2>
+			<div id="divProductsList">
+				<ul id="lstGroupProductsList">
+				</ul>
+				<input type="button" value="Group" id="btnGroupDetail"><br /><br />			
+				<script>
+					$("#btnGroupDetail").click(function(){
+						var sGroupname = $("#dbgGroupname").val();
+						GetGroup(sGroupname);
+					});		
+				</script>
+			</div>
+		</div>
+		<!-- END - Page Logged In -->
+		
+		<!-- START - Page OrderProduct -->
+		<div id="pageOrderProduct" class="pageContainer">
+			<h2>Order a drink</h2>
+			<div id="products">
+
+			</div>
+			<input type="button" id="btnSubmitOrder" value="order" />
+		</div>
+		<!-- END - Page OrderProduct -->
+		
+		<div id="pageOrderAmbush" class="pageContainer">
+			<h2>Order an ambush</h2>
+			<div id="ambushes">
+
+			</div>
+			<input type="button" id="btnSubmitAmbush" value="attack" />
+			<script>
+				$("#btnSubmitAmbush").click(function(){
+					var sGroupname 	= $("#dbgGroupname").val();
+					var sSubject	= $("#dbgSelectedAmbushSubject").val();
+					var sAmbush		= $("#dbgSelectedAmbush").val();
+					
+					saveAmbush(sGroupname, sSubject, sAmbush);
+				});		
+			</script>
+		</div>
+		<div id="" class="debug">
+			<h2>Debug info and hidden values</h2>
+			<input type="text" id="dbgDeviceId" value="">
+			<input type="text" id="dbgUsername" value="">
+			<input type="text" id="dbgGroupname" value="">
+			<input type="text" id="dbgPoints" value="">	
+			<input type="text" id="dbgSelectedProduct">
+			<input type="text" id="dbgSelectedProductOptionsugar">
+			<input type="text" id="dbgSelectedProductOptionsweetner">
+			<input type="text" id="dbgSelectedProductOptionmilk">
+			<input type="text" id="dbgSelectedAmbush">
+			<input type="text" id="dbgSelectedAmbushSubject">
+		</div>
+	<script src="js/bootstrap.min.js"></script>
+	</body>
+	<script>
+		document.addEventListener("deviceready", setupApp(), false);		
+	</script>	
+</html>

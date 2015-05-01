@@ -119,10 +119,12 @@ function SetGroup(returnData){
 			$("#divStartRound").show();
 			
 		}
+		
 		// Set rounded timer
 		if (iCountdown > 1){
+			var iWidth = $(window).width();
 			$("#countdown").countdown360({
-		    	radius      : 80,
+		    	radius      : (iWidth/2)-(10*iWidth/100),
 				strokeWidth : 360, 
 		        seconds     : iCountdown,
 				strokeWidth : 3,

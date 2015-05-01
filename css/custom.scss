@@ -1,0 +1,44 @@
+@import 'assest/fonts';
+@import 'assest/reset';
+@import 'assest/icons';
+@import 'assest/variables';
+
+/* VIEWS */
+@import 'assest/login';
+@import 'assest/groups';
+
+/* Basic layout */
+input[type=text] {
+	border: none;
+	box-shadow: none;
+	&:active,
+	&:focus,
+	&:hover {
+		border: none;
+		box-shadow:none;
+	}
+}
+
+// Buttons
+button.btn-circle {
+	padding: 6px 10px;
+	background-color: #f37849;
+	height: 50px;
+	-moz-border-radius:25px;
+	-webkit-border-radius: 25px;
+	width: 50px;
+}
+
+// Sticky footer
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 30px;
+  background-color: #828282;
+	p { padding:5px 0px;}
+  a {
+  	color: $white;
+  }
+}
