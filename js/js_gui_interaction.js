@@ -96,6 +96,7 @@ function SetGroup(returnData){
 	console.log('>>> group: '+ sGroupname +'');
 	$(".lblGroupName").text(sGroupname);
 	if (returnData.round != undefined) {
+		var iCountdefault = returnData.round.defaultDuration;
 		var iCountdown 	= returnData.round.secondsLeft;
 		var iPoints		= returnData.round.points;
 	} else {
@@ -119,17 +120,21 @@ function SetGroup(returnData){
 			
 		}
 		// Set rounded timer
-		$("#countdown").countdown360({
-       	 radius      : 60,
-         seconds     : iCountdown,
-         strokeWidth : 3,
-         strokeStyle: "#b4740e",
-         fontColor   : '#b4740e',
-         fillStyle: "#ffe792",
-         autostart   : false,
-         onComplete  : function () { console.log('done') }
-		   }).start()
-		
+		if (iCountdown > 1){
+			$("#countdown").countdown360({
+		    	radius      : 80,
+				strokeWidth : 360, 
+		        seconds     : iCountdown,
+				strokeWidth : 3,
+				strokeStyle: "#b4740e",
+				fontColor   : '#b4740e',
+				fillStyle: "#ffe792",
+				autostart   : false,
+				onComplete  : function () { 
+			    	console.log('Rouder Counter is over !') .stop()   
+			    }
+			}).start()
+		}
 	
 		// Set points
 		console.log('>>> Points: '+ iPoints +'');
