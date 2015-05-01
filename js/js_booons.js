@@ -230,11 +230,15 @@ function SaveOrder(sGroupname, sUsername, sProduct, sSugar, sSweetner, sMilk) {
 			$(function(){
 				console.log('Result for SaveOrder:');
 				console.dir( data );
-				alert('ambush screen !');
+				// alert('ambush screen !');
 				GetOrderAmbushes(sGroupname, sUsername);
 				// SetGroup( data );
 		});	    	
 	});
+}
+
+function saveAmbush(sGroup, sSubject, sAmbush){
+	alert('save ambush');
 }
 
 function GetOrderAmbushes(sGroupname, sUsername) {

@@ -153,13 +153,25 @@
 		<div id="pageOrderProduct" class="pageContainer">
 			<h2>Order a drink</h2>
 			<div id="products">
+
 			</div>
+			<input type="button" id="btnSubmitOrder" value="order" />
 		</div>
 		<div id="pageOrderAmbush" class="pageContainer">
 			<h2>Order an ambush</h2>
 			<div id="ambushes">
 
 			</div>
+			<input type="button" id="btnSubmitAmbush" value="attack" />
+			<script>
+				$("#btnSubmitAmbush").click(function(){
+					var sGroupname 	= $("#dbgGroupname").val();
+					var sSubject	= $("#dbgSelectedAmbushSubject").val();
+					var sAmbush		= $("#dbgSelectedAmbush").val();
+					
+					saveAmbush(sGroupname, sSubject, sAmbush);
+				});		
+			</script>
 		</div>
 		<div id="" class="debug">
 			<h2>Debug info and hidden values</h2>

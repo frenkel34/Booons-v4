@@ -314,7 +314,7 @@ function SetOrderProducts(returnData) {
 			}
 				
 		}			
-					sHtml = sHtml + '<input type="button" id="btnSubmitOrder" value="order" />'
+
 	}
 	$("#products").html(sHtml);
 	
