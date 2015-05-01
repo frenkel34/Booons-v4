@@ -74,10 +74,9 @@
 			<h2 class="lblGroupName">[Groupname]</h2>
 			<input type="button" value="view users" id="btnUserList"><br />
 			<input type="button" value="view group" id="btnGroupDetails"><br /><br />
+			<input type="button" value="config products" id="btnGroupProduct"><br /><br />			
 			<div id="divStartRound">
 				<input type="button" value="start round" id="btnStartRound"><br /><br />
-				<input type="button" value="config products" id="btnGroupProduct"><br /><br />			
-				<input type="button" value="order" id="btnOrder"><br /><br />
 			</div>
 			<div id="divUsers">
 				<p>These users are logged in</p>
@@ -85,6 +84,7 @@
 				</ul>	
 			</div>
 			<div id="divStatus">
+				<input type="button" value="order" id="btnOrder"><br /><br />
 				<div id="divPoints">
 					
 				</div>
@@ -94,6 +94,11 @@
 				<div id="countdown"></div>
 				</div>
 			<script>
+			$("#btnOrder").click(function(){
+				var sGroupname 	= $("#dbgGroupname").val();
+				var sUsername	= $("#dbgUsername").val();
+				GetOrderProduct(sGroupname, sUsername);
+			});
 			
 			$("#btnSubmit2").click(function(){
 				var sGroupname = $("#dbgGroupname").val();
@@ -150,6 +155,7 @@
 		<div id="pageOrderAmbush" class="pageContainer">
 			<h2>Order an ambush</h2>
 			<div id="ambushes">
+
 			</div>
 		</div>
 		<div id="" class="debug">

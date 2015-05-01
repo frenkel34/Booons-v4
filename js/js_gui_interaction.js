@@ -110,7 +110,7 @@ function SetGroup(returnData){
 		console.log('>>> Timer: '+ iCountdown +'');
 		$("#lblCountDown").text(iCountdown);
 		if ((returnData.round != undefined)) {
-			startRoundCountDown(iCountdown);
+			startRoundCountDown(iCountdown, sGroupname);
 			$("#divCountDown").show();			
 			$("#divStartRound").hide();
 		}	else {
@@ -156,7 +156,12 @@ function SetGroup(returnData){
 		$("#pageGroupIdle").show();
 		$("#divUsers").hide();
 		$("#divStatus").show();
-
+		if ((returnData.round != undefined)) {
+			$("#divStatus").show();
+		} else {
+			$("#divStatus").hide();
+		}
+		
 		// Create orderlist
 		console.log('>>> done !');
 }

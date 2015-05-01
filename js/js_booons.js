@@ -101,6 +101,8 @@ function countdown_timer(){
   if(max_time == 0){
   	setTimeout(function() {
 	alert('Time is up'); },500);
+	var sGroupname = $("#dbgGroupname").val();
+	GetGroup(sGroupname);
     clearInterval(cinterval);
   }
 }
@@ -229,7 +231,7 @@ function SaveOrder(sGroupname, sUsername, sProduct, sSugar, sSweetner, sMilk) {
 				console.log('Result for SaveOrder:');
 				console.dir( data );
 				alert('ambush screen !');
-				GetOrderAmbushes(sGroupname, sUsername);
+				SetOrderAmbushes(data, sUsername);
 				// SetGroup( data );
 		});	    	
 	});
