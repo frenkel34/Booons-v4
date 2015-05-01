@@ -35,6 +35,7 @@ function GetDeviceDefaults(sDeviceId){
 }
 
 function LoginUser(sDeviceId, sUsername, sGroupname){
+
 	var sMethode		= 'LoginUser';
 	var sQueryString 	= 'deviceid='+ sDeviceId +'username='+ sUsername +'groupname='+ sGroupname +'&method='+sMethode;
 	var sHashKey 		= "";
@@ -238,7 +239,37 @@ function SaveOrder(sGroupname, sUsername, sProduct, sSugar, sSweetner, sMilk) {
 }
 
 function saveAmbush(sGroup, sSubject, sAmbush){
-	alert('save ambush');
+	//CRAP: sUsername needs to be added
+	
+	console.log('starting saveAmbush('+sGroup+', '+sSubject+', '+sAmbush+')');
+	
+	var sMethode		= 'SaveAmbush';
+	var sGroupname		= sGroup;
+	var sSubject		= sSubject;
+	var sAmbush			= sAmbush;
+	var sUsername		= $("#dbgUsername").val();
+	var sQueryString 	= 'groupname='+ sGroupname +'&uuusername='+ sUsername +'&subject='+ sSubject +'&ambush='+ sAmbush +'&method='+sMethode;
+	var sHashKey 		= "";
+	var sHashKey 		= CryptoJS.SHA1(sQueryString).toString();
+	  
+	  $.getJSON( sAPIServer + "apiv4.asp?jsoncallback=?", {
+	    groupname: sGroupname,
+	    username: sUsername,
+		subject: sSubject,
+		ambush: sAmbush,
+	    method: sMethode,
+	    hashKey: sHashKey
+	  })
+	    .done(function( data ) {
+			$(function(){
+				console.log('Result for saveAmbush:');
+				console.dir( data );
+				// alert('ambush screen !');
+				GetGroup(sGroupname);
+				// SetGroup( data );
+		});	    	
+	});
+	
 }
 
 function GetOrderAmbushes(sGroupname, sUsername) {

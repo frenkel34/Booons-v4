@@ -94,7 +94,8 @@ function SetGroup(returnData){
 	console.log('starting SetGroup(object)');
 	var sGroupname 	= returnData.groupName;
 	console.log('>>> group: '+ sGroupname +'');
-	$(".lblGroupName").text(sGroupname);
+	var aAmbushes = returnData.ambushes;
+	$(".lblGroupName").text(sGroupname);	
 	if (returnData.round != undefined) {
 		var iCountdefault = returnData.round.defaultDuration;
 		var iCountdown 	= returnData.round.secondsLeft;
@@ -133,7 +134,7 @@ function SetGroup(returnData){
 				fillStyle: "#ffe792",
 				autostart   : false,
 				onComplete  : function () { 
-			    	console.log('Rouder Counter is over !') .stop()   
+			    	console.log('Rouder Counter is over !'); 
 			    }
 			}).start()
 		}
@@ -144,6 +145,23 @@ function SetGroup(returnData){
 		$("#divPoints").html('');
 		for (i = 0; i < iPoints; i++) { 
 			$("#divPoints").append(sPointsHtml);
+		}
+
+		// Set Ambushes
+		console.log('considering if there are ambushes');
+		var bIsArray = Array.isArray(aAmbushes);
+		if (bIsArray == true) {
+			var iArrayLength = aAmbushes.length;
+			console.log('>>> Ambushes:');
+			$("#divAmbushes").html('');
+			sAmbushHtml = '';
+			$("#divAmbushes").append('<ul>');
+			for (var i = 0; i < iArrayLength; i++) {
+				console.log('>>');
+				var sAmbushName = aAmbushes[i].ambushname
+				$("#divAmbushes").append('<img id="" width="30px" class="AmbushIcon" src="img/'+ sAmbushName +'1.png" /> ')	
+			}
+			$("#divAmbushes").append('</ul>');
 		}
 
 		// Create userlist
