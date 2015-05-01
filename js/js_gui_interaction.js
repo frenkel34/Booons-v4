@@ -149,6 +149,7 @@ function SetGroup(returnData){
 		var bIsArray = Array.isArray(aUsers);
 		console.log('>>> Users: '+ bIsArray +'');
 
+		$("#lstUsers").html('');
 		if (bIsArray == true) {
 			var iArrayLength = aUsers.length;
 			for (var i = 0; i < iArrayLength; i++) {
@@ -162,9 +163,9 @@ function SetGroup(returnData){
 		$("#divUsers").hide();
 		$("#divStatus").show();
 		if ((returnData.round != undefined)) {
-			$("#divStatus").show();
+			$("#divRoundOpen").show();
 		} else {
-			$("#divStatus").hide();
+			$("#divRoundOpen").hide();
 		}
 		
 		// Create orderlist
@@ -182,6 +183,7 @@ function SetOrderAmbushes(returnData, sUsername) {
 	console.dir(returnData);
 	// gui
 	$("#ambushes").html('');
+	console.log('start...');
 	if (bUserIsArray == true) {		
 		var iUserArrayLength = aUsers.length;
 		for (var iUsr = 0; iUsr < iUserArrayLength; iUsr++) {

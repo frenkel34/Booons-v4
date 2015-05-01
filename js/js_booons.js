@@ -231,7 +231,7 @@ function SaveOrder(sGroupname, sUsername, sProduct, sSugar, sSweetner, sMilk) {
 				console.log('Result for SaveOrder:');
 				console.dir( data );
 				alert('ambush screen !');
-				SetOrderAmbushes(data, sUsername);
+				GetOrderAmbushes(sGroupname, sUsername);
 				// SetGroup( data );
 		});	    	
 	});
