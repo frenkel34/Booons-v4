@@ -118,6 +118,18 @@ function SetGroup(returnData){
 			$("#divStartRound").show();
 			
 		}
+		// Set rounded timer
+		$("#countdown").countdown360({
+       	 radius      : 60,
+         seconds     : iCountdown,
+         strokeWidth : 3,
+         strokeStyle: "#b4740e",
+         fontColor   : '#b4740e',
+         fillStyle: "#ffe792",
+         autostart   : false,
+         onComplete  : function () { console.log('done') }
+		   }).start()
+		
 	
 		// Set points
 		console.log('>>> Points: '+ iPoints +'');
