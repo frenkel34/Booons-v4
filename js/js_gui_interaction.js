@@ -148,93 +148,209 @@ function SetGroup(returnData){
 		// Create orderlist
 		console.log('>>> done !');
 }
+function SetOrderAmbushes(returnData, sUsername) {
+	// system
+	var sGroupname 		= returnData.groupName;
+	var aAmbushes 		= returnData.ambushes;
+	var aUsers 			= returnData.users;
+	var bUserIsArray 	= Array.isArray(aUsers);
+	var bAmbushIsArray 	= Array.isArray(aAmbushes);
+	var sHtml 			= ''
+	// debug
+	console.dir(returnData);
+	// gui
+	$("#ambushes").html('');
+	if (bUserIsArray == true) {		
+		var iUserArrayLength = aUsers.length;
+		for (var iUsr = 0; iUsr < iUserArrayLength; iUsr++) {
+			var sSubjectName	= aUsers[iUsr].username
+			var sPoints 		= aUsers[iUsr].pointBalance
+			var sActivity		= aUsers[iUsr].lastActivity
+			if (sSubjectName != sUsername) {
+				sHtml = sHtml +'<div class="useritem">'
+				sHtml = sHtml +'<div ambushsubject="'+ sSubjectName +'" class="userlabel">'+ sSubjectName +' ('+ sPoints +' booons)</div>'
+				sHtml = sHtml + '<div class="ambushperuser">'
+				if (bAmbushIsArray == true) {
+					var iAmbushArrayLength = aAmbushes.length;
+					for (var iAmb = 0; iAmb < iAmbushArrayLength; iAmb++) {
+						var sAmbushName = aAmbushes[iAmb].name
+						sHtml = sHtml +'<img id="" width="30px" class="AmbushIcon" ambushsubject="'+ sSubjectName +'" ambushname="'+ sAmbushName +'" src="img/'+ sAmbushName +'2.png" /> '
+					}
+				}
+				sHtml = sHtml +'</div>'
+				sHtml = sHtml +'</div>'
+			}
+		}			
+		
+	}	
+	$("#ambushes").html(sHtml);
+	$(".ambushperuser").hide();
+	$(".userlabel").click(function(){
+		var sAmbushlabel   = $(this).text();
+		var sAmbushSubject = $(this).attr('ambushsubject')
+		$("#dbgSelectedAmbushSubject").val(sAmbushSubject);
+		$("#dbgSelectedAmbush").val('');
+		$(".ambushperuser").slideUp(500);
+		$(this).next('div').slideDown(1000);
+		var sParent = $(this).parent('div').find('img').each(function(){
+			console.log($(this).attr('ambushname'));
+			sResetAmbushlabel = $(this).attr('ambushname');
+			$(this).attr("src","img/"+sResetAmbushlabel+"2.png");
+		});
+	});
+	$(".AmbushIcon").click(function(){
+		var sAmbushlabel 	= $(this).attr('ambushname');
+		var sSubjectname 	= $(this).attr('sSubjectname');
+		$("#dbgSelectedAmbush").val(sAmbushlabel);
+		console.log('pulling '+ sAmbushlabel +' on '+ sSubjectname);
+		// reset the ambushes
+		
+		var sParent = $(this).parent('div').find('img').each(function(){
+			console.log($(this).attr('ambushname'));
+			sResetAmbushlabel = $(this).attr('ambushname');
+			$(this).attr("src","img/"+sResetAmbushlabel+"2.png");
+		});
+		
+		
+		
+		
+		$(this).attr("src","img/"+sAmbushlabel+"1.png");
+		
+	});
+	
+	
+	
+	
+
+	$(".pageContainer").hide();
+	$("#pageOrderAmbush").show();	
+
+}
 
 function SetOrderProducts(returnData) {
-//	alert('Im setting orders and ambushes and than return to group');
 	// system
-	var sGroupname = returnData.groupName;
+	var sGroupname 		= returnData.groupName;
+	var aProducts 		= returnData.products;
+	var bIsArray 		= Array.isArray(aProducts);
+	var sHtml 			= ''
+	
 	// debug
 	console.log('Showing list of products to order');
-	// gui	
-	var aProducts = returnData.products;
-	console.dir(aProducts);
-	var bIsArray = Array.isArray(aProducts);
-	console.log('>>> Products in group to order from: '+ bIsArray +'');
+	console.log('Products is array? '+ bIsArray +'');
 
-	$("#lstOrderProductsList").html('');
-	if (bIsArray == true) {
+	// gui	
+//	$("#productoptions").hide();
+	$("#products").html('');
+	if (bIsArray == true) {			
+
 		var iArrayLength = aProducts.length;
 		for (var iPrd = 0; iPrd < iArrayLength; iPrd++) {
-			var sProducts	= aProducts[iPrd].name
-			var sStatus 	= aProducts[iPrd].status
-			var sSugar		= aProducts[iPrd].sugar
-			var sSweetner	= aProducts[iPrd].sweetner
-			var sMilk		= aProducts[iPrd].milk
-			var sHtml 		= ''
-				if (sStatus == true) {
-					sHtml = '<div style="border: solid 1px black;" id="'+ sProducts +'" class="lstOrderProductItem">'+ sProducts;
-					sHtml = sHtml + '<div style="border: solid 1px red; display:none; background-color:#111;" id="'+ sProducts +'_options" class="lstOrderProductSubItem">';
+			var sProductname	= aProducts[iPrd].name
+			var sStatus 		= aProducts[iPrd].status
+			var sSugar			= aProducts[iPrd].sugar
+			var sSweetner		= aProducts[iPrd].sweetner
+			var sMilk			= aProducts[iPrd].milk
+
+			console.log('setting up: '+ sProductname)
+			if (sStatus == true) {
+				console.log('setting up for true: '+ sProductname)
+				sHtml = sHtml +'<div class="productitem">'
+				sHtml = sHtml +'<div class="productlabel">'+ sProductname +'</div>'
+				if (sSugar != 0 || sSweetner != 0 || sMilk != 0 ) {
+					sHtml = sHtml + '<div id="productoptions'+ sProductname +'" class="productoptions" style="display:none;">'
 					if (sSugar > 0) {
 						var sOptionname = 'sugar';
-						sHtml = sHtml + '<div id="'+ sProducts +'_'+ sOptionname +'">'
-						for (var iCnt = 0; iCnt < 3; iCnt++) {
-							sHtml = sHtml + '<div style="color:#c5c5c5;" productname="'+ sProducts +'" optionname="'+ sOptionname +'" optionvalue="'+ iCnt +'"  id="'+ sProducts + sOptionname + iCnt  +'" class="lstOrderProductSubItemOption" style="width:100px">['+ iCnt  +'] '+ sOptionname +'</div>'
+						sHtml = sHtml + '<div id="productoption'+ sOptionname +'">'
+						for (var iCnt = 1; iCnt < 4; iCnt++) {
+							sHtml = sHtml + '<img width="30px" src="img/'+ sOptionname +'2.png" productname="'+ sProductname +'" optionname="'+ sOptionname +'" optionvalue="'+ iCnt  +'"  id="'+ sProductname + sOptionname + iCnt  +'" class="OptionIcon" /> '
 						}
 						sHtml = sHtml + '</div>'
-					};					
+					};	
 					if (sSweetner > 0) {
 						var sOptionname = 'sweetner';
-						sHtml = sHtml + '<div id="'+ sProducts +'_'+ sOptionname +'">'
-						for (var iCnt = 0; iCnt < 3; iCnt++) {
-							sHtml = sHtml + '<div style="color:#c5c5c5;" productname="'+ sProducts +'" optionname="'+ sOptionname +'" optionvalue="'+ iCnt +'"  id="'+ sProducts + sOptionname + iCnt  +'" class="lstOrderProductSubItemOption" style="width:100px">['+ iCnt  +'] '+ sOptionname +'</div>'
+						sHtml = sHtml + '<div id="productoption'+ sOptionname +'">'
+						for (var iCnt = 1; iCnt < 4; iCnt++) {
+							sHtml = sHtml + '<img width="30px" src="img/'+ sOptionname +'2.png" productname="'+ sProductname +'" optionname="'+ sOptionname +'" optionvalue="'+ iCnt  +'"  id="'+ sProductname + sOptionname + iCnt  +'" class="OptionIcon" /> '
 						}
 						sHtml = sHtml + '</div>'
-					};					
-					
+					};	
+					if (sMilk > 0) {
+						var sOptionname = 'milk';
+						sHtml = sHtml + '<div id="productoption'+ sOptionname +'">'
+						for (var iCnt = 1; iCnt < 4; iCnt++) {
+							sHtml = sHtml + '<img width="30px" src="img/'+ sOptionname +'2.png" productname="'+ sProductname +'" optionname="'+ sOptionname +'" optionvalue="'+ iCnt  +'"  id="'+ sProductname + sOptionname + iCnt  +'" class="OptionIcon" /> '
+						}
+						sHtml = sHtml + '</div>'
+					};	
 					sHtml = sHtml + '</div>'
-					$("#lstOrderProductsList").append(sHtml);
-				};
-
-			sHtml = sHtml + '</div>'
+				}
+				sHtml = sHtml + '</div>'
+				sHtml = sHtml + '</div>'
+				
 			}
-}
-	$(".lstOrderProductSubItemOption").click(function(){
+				
+		}			
+					sHtml = sHtml + '<input type="button" id="btnSubmitOrder" value="order" />'
+	}
+	$("#products").html(sHtml);
+	
+
+	$(".productlabel").click(function(){
+		var sProductlabel = $(this).text();
+		$("#dbgSelectedProduct").val(sProductlabel);
+		$("#dbgSelectedProductOptionsugar").val('0');
+		$("#dbgSelectedProductOptionsweetner").val('0');
+		$("#dbgSelectedProductOptionmilk").val('0');
+		$(".productoptions").slideUp(500);
+		$(this).next('div').slideDown(1000);
+	});
+	
+	$(".OptionIcon").click(function(){
 		var sClickedOption 	= $(this).attr('optionname');
 		var sClickedValue 	= $(this).attr('optionvalue');
-		var sProductname		= $(this).attr('productname');
-//		alert('Selected: '+ sProductname +' with '+ sClickedValue +' '+sClickedOption);
-		var idName = sProductname + sClickedOption ;
-		if (sClickedValue >= 0){
-			$("#"+ idName +'0').css({"color": "red"});
+		var sProductname	= $(this).attr('productname');	
+		var idName 			= sProductname + sClickedOption ;
+		console.log('Ordering a '+sProductname+ ' with '+ sClickedValue +' '+sClickedOption);
+
+		// Check if the user clicks on the current value !
+		if (sClickedValue ==  $("#dbgSelectedProductOption"+sClickedOption).val()){
+			$("#"+ idName +'1').attr("src","img/"+sClickedOption+"2.png");
+			$("#"+ idName +'2').attr("src","img/"+sClickedOption+"2.png");
+			$("#"+ idName +'3').attr("src","img/"+sClickedOption+"2.png");
+			$("#dbgSelectedProductOption"+sClickedOption).val('0');
 		} else {
-			$("#"+ idName +'0').css({"color": "white"});		
+			if (sClickedValue >= 1){
+				$("#"+ idName +'1').attr("src","img/"+sClickedOption+"1.png");
+				$("#dbgSelectedProductOption"+sClickedOption).val('1');
+			} else {
+				$("#"+ idName +'1').attr("src","img/"+sClickedOption+"2.png");
+			}
+			if (sClickedValue >= 2){
+				$("#"+ idName +'2').attr("src","img/"+sClickedOption+"1.png");
+				$("#dbgSelectedProductOption"+sClickedOption).val('2');
+			} else {
+				$("#"+ idName +'2').attr("src","img/"+sClickedOption+"2.png");
+			}
+			if (sClickedValue >= 3){
+				$("#"+ idName +'3').attr("src","img/"+sClickedOption+"1.png");
+				$("#dbgSelectedProductOption"+sClickedOption).val('3');
+			} else {
+				$("#"+ idName +'3').attr("src","img/"+sClickedOption+"2.png");
+			}
 		}
-		if (sClickedValue >= 1){
-			$("#"+ idName +'1').css({"color": "red"});
-		} else {
-			$("#"+ idName +'1').css({"color": "white"});		
-		}
-		if (sClickedValue >= 2){
-			$("#"+ idName+'2').css({"color": "red"});
-		} else {
-			$("#"+ idName +'2').css({"color": "white"});		
-		}
-		
 		
 	});
-	$(".lstOrderProductSubItem").hide();
-	$(".lstOrderProductItem").click(function(){
-		var sProductname = $(this).attr('id');
-		var sCurrentValue = $(this).closest('div');
-		$(".lstOrderProductSubItem").hide();
-		$("#"+sProductname+"_options").show();
-		
+	$("#btnSubmitOrder").click(function(){
+		var sUsername 	= $("#dbgUsername").val();
+		var sProduct 	= $("#dbgSelectedProduct").val();
+		var sSugar 		= $("#dbgSelectedProductOptionsugar").val();
+		var sSweetner 	= $("#dbgSelectedProductOptionsweetner").val();
+		var sMilk		 = $("#dbgSelectedProductOptionmilk").val();
+		SaveOrder(sGroupname, sUsername, sProduct, sSugar, sSweetner, sMilk);
 	});
 	$(".pageContainer").hide();
-	$("#pageOrderProduct").show();
-// 	SetGroup(returnData);
+	$("#pageOrderProduct").show();	
 }
-
 function SetGroupProducts(returnData){
 	console.log('starting SetGroupProducts(object)');
 	// system
