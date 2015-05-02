@@ -45,6 +45,18 @@
 			#btnLoginNotMe p{
 				color: #ffffff;
 			}
+			
+			#lblGroupName {
+				color: fff;
+				float: left;
+				font-size: 20px;
+			}
+			#divErrorLayover {
+				background-image:url('img/stain1.png'); 
+				background-repeat: no-repeat; 
+				width:100%; 
+				height:70vh; 
+			}
 		</style>
 		
 		
@@ -66,6 +78,7 @@
 		      <a class="navbar-brand" href="#">
 		        <img alt="Booons" src="images/logo.svg" height="37" width="69">
 		      </a>
+			  <span style="float: left;" class="lblGroupName"></span>
 		    </div>
 		  </div>
 		</nav><!-- END - Header -->
@@ -113,13 +126,13 @@
 				
 		<!-- START - Page Stop App -->
 		<div id="pageStopApp" class="pageContainer">
-			<h1>ERROR ON API !!!!!!!!!!!</h1>
+			<div id="divErrorLayover"></div>
 		</div>
 		<!-- END - Page Stop App -->
 		
 		<!-- START - Page Group Idle -->
 		<div id="pageGroupIdle" class="pageContainer">
-			<h2 class="lblGroupName">[Groupname]</h2>
+			
 			<input type="button" value="view users" id="btnUserList"><br />
 			<input type="button" value="view group" id="btnGroupDetails"><br /><br />
 			<input type="button" value="config products" id="btnGroupProduct"><br /><br />			
