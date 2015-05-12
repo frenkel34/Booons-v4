@@ -54,6 +54,19 @@ body, h1, h2, h3, h4, h5, h6, p {
   position: relative;
   display: block; }
 
+#login input.icon {
+  padding-left: 50px; }
+#login div.icon {
+  position: absolute;
+  width: 40px; }
+  #login div.icon img {
+    display: block;
+    margin: 0 auto;
+    position: relative; }
+#login .btn-circle img {
+  position: relative;
+  display: block; }
+
 /* Basic layout */
 input[type=text] {
   border: none;

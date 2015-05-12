@@ -19,8 +19,8 @@
 </head>
 <body>
 
-<!-- view: Groups -->
-<div id="group">
+<!-- view: Drinks -->
+<div id="drinks">
 	<!-- Header -->
 	<nav class="navbar navbar-default">
 	  <div class="container">
@@ -34,43 +34,47 @@
 	<!-- Container -->
 	<div class="container">
 	  
-
+<!-- Coffee -->
 <div class="list-group">
-  <!-- First -->
-  <a href="#" class="list-group-item active">
+  <a href="#" class="list-group-item active" data-toggle="collapse" data-target="#coffee" aria-expanded="false" aria-controls="coffee">
     <div class="row">
-	    <div class="col-xs-2">
-	    	<img alt="User" class="icon" src="images/group.svg" height="33" width="39">
-	    </div>
-	    <div class="col-xs-7">
-	    	<h4 class="list-group-item-heading">List group item heading</h4>
-	    	<p class="list-group-item-text">...</p>
-	    </div>
-	    <div class="col-xs-3 text-right">
-	    	<button type="submit" class="btn btn-circle">
-	    		<img alt=">" class="icon" src="images/new_round.svg" height="30" width="30">
-	    	</button>
+	    <div class="col-xs-12 text-center">
+	    	<h2>Coffee</h2>
 	    </div>
     </div>
-  </a><!-- END - First -->
-  <!-- Second -->
-  <a href="#" class="list-group-item">
+  </a>
+  <!-- collapse -->
+  <div class="collapse" id="coffee" data-toggle="collapse" data-target="#coffee" aria-expanded="false" aria-controls="coffee">
+	  <div class="list-group-item">
+	  	<div class="row">
+		    <div class="col-xs-12 text-center">
+			    <p>Here some text</p>
+		    </div>
+	    </div>
+	  </div>
+	</div><!-- END - collapse -->
+</div><!-- END - Coffee -->
+
+<!-- Tea -->
+<div class="list-group">
+  <a href="#" class="list-group-item active" data-toggle="collapse" data-target="#Tea" aria-expanded="false" aria-controls="Tea">
     <div class="row">
-	    <div class="col-xs-2">
-	    	<img alt="User" class="icon" src="images/group.svg" height="33" width="39">
-	    </div>
-	    <div class="col-xs-7">
-	    	<h4 class="list-group-item-heading">List group item heading</h4>
-	    	<p class="list-group-item-text">...</p>
-	    </div>
-	    <div class="col-xs-3 text-right">
-	    	<button type="submit" class="btn btn-circle">
-	    		200
-	    	</button>
+	    <div class="col-xs-12 text-center">
+	    	<h2>Tea</h2>
 	    </div>
     </div>
-  </a><!-- END - Second -->
-</div>
+  </a>
+  <!-- collapse -->
+  <div class="collapse" id="Tea" data-toggle="collapse" data-target="#Tea" aria-expanded="false" aria-controls="Tea">
+	  <div class="list-group-item">
+	  	<div class="row">
+		    <div class="col-xs-12 text-center">
+			    <p>Here some text</p>
+		    </div>
+	    </div>
+	  </div>
+	</div><!-- END - collapse -->
+</div><!-- END - Tea -->
 
 <div class="row">
 	<div class="col-xs-12 text-center">
@@ -86,7 +90,7 @@
         <p class="text-muted"><a href="#">Is this me?</a></p>
       </div>
     </footer><!-- END - Footer -->
-</div><!-- view: Groups -->
+</div><!-- view: Drinks -->
 
 <!-- Scripts -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

@@ -1,0 +1,22 @@
+// _drinks.scss
+
+#login {
+	input.icon {
+		padding-left: 50px;
+	}
+	div.icon {
+		position: absolute;
+		width: 40px;
+		img {
+			display: block;
+			margin: 0 auto;
+			position: relative;
+		}
+	}
+	.btn-circle {
+		img {
+			position: relative;
+			display: block;
+		}
+	}
+}
