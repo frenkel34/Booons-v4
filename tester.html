@@ -27,7 +27,6 @@
 			}
 			.debug{
 				color: #eee;
-			
 			}
 			.debug input{ 
 				color: #fdd;
@@ -133,6 +132,7 @@
 		<!-- START - Page Group Idle -->
 		<div id="pageGroupIdle" class="pageContainer">
 			
+			<input type="button" value="Refresh group" id="btnRefresh"><br />
 			<input type="button" value="view users" id="btnUserList"><br />
 			<input type="button" value="view group" id="btnGroupDetails"><br /><br />
 			<input type="button" value="config products" id="btnGroupProduct"><br /><br />			
@@ -162,6 +162,11 @@
 			<div id="divStatus">
 				status...
 			<script>
+			btnRefresh
+			$("#btnRefresh").click(function(){
+				var sGroupname 	= $("#dbgGroupname").val();
+				GetGroup(sGroupname);
+			});
 			$("#btnOrder").click(function(){
 				var sGroupname 	= $("#dbgGroupname").val();
 				var sUsername	= $("#dbgUsername").val();
